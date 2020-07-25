@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SellerSettingsActivity"
+    android:orientation="vertical"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/tambahProdukCV"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="3dp"
+        app:cardUseCompatPadding="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="17dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/logo_start"
+                android:layout_marginLeft="330dp"
+                android:layout_marginRight="20dp"/>
+
+            <TextView
+                android:id="@+id/tambahProdukTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tambah Produk"
+                android:textSize="14sp"
+                android:lineHeight="14sp"
+                android:textStyle="normal"
+                android:textColor="#000000"
+                android:fontFamily="Roboto"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Menambah Produk"
+                android:textSize="14sp"
+                android:lineHeight="14sp"
+                android:textStyle="normal"
+                android:textColor="#000000"
+                android:fontFamily="Roboto"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/tambahProdukTxt"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/editProfileCV"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="3dp"
+        app:cardUseCompatPadding="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="17dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/logo_start"
+                android:layout_marginLeft="330dp"
+                android:layout_marginRight="20dp"/>
+
+            <TextView
+                android:id="@+id/editProfileTxtTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit Profile"
+                android:textSize="14sp"
+                android:lineHeight="14sp"
+                android:textStyle="normal"
+                android:textColor="#000000"
+                android:fontFamily="Roboto"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mengedit Profile"
+                android:textSize="14sp"
+                android:lineHeight="14sp"
+                android:textStyle="normal"
+                android:textColor="#000000"
+                android:fontFamily="Roboto"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/editProfileTxtTxt"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>
