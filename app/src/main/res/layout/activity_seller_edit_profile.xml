@@ -1,9 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SellerEditProfileActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/sellerProfileImageEdit"
+                android:layout_width="123dp"
+                android:layout_height="116dp"
+                android:src="@drawable/logo_profile_2"
+                android:layout_gravity="center"
+                android:layout_marginTop="42dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NAMA"
+                android:textSize="14sp"
+                android:lineHeight="14sp"
+                android:textStyle="normal"
+                android:fontFamily="Roboto"
+                android:textColor="#000000"
+                android:layout_marginTop="38dp"
+                android:layout_marginLeft="31dp"/>
+
+            <EditText
+                android:id="@+id/namaSellerEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="29dp"
+                android:layout_marginRight="23dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ALAMAT"
+                android:textSize="14sp"
+                android:lineHeight="14sp"
+                android:textStyle="normal"
+                android:fontFamily="Roboto"
+                android:textColor="#000000"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="31dp"/>
+
+            <EditText
+                android:id="@+id/alamatSellerEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="29dp"
+                android:layout_marginRight="23dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NO HP"
+                android:textSize="14sp"
+                android:lineHeight="14sp"
+                android:textStyle="normal"
+                android:fontFamily="Roboto"
+                android:textColor="#000000"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="31dp"/>
+
+            <EditText
+                android:id="@+id/phoneSellerEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="29dp"
+                android:layout_marginRight="23dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RT/RW"
+                android:textSize="14sp"
+                android:lineHeight="14sp"
+                android:textStyle="normal"
+                android:fontFamily="Roboto"
+                android:textColor="#000000"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="31dp"/>
+
+            <EditText
+                android:id="@+id/rtrwSellerEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="29dp"
+                android:layout_marginRight="23dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DESKRIPSI"
+                android:textSize="14sp"
+                android:lineHeight="14sp"
+                android:textStyle="normal"
+                android:fontFamily="Roboto"
+                android:textColor="#000000"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="31dp"/>
+
+            <EditText
+                android:id="@+id/deskripsiSellerEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="29dp"
+                android:layout_marginRight="23dp"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/editSellerBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Simpan"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="220dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="23dp"/>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

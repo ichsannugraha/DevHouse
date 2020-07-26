@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserEditProfileActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -13,9 +16,9 @@
             android:orientation="vertical">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imageUser"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:id="@+id/imageUserEdit"
+                android:layout_width="123dp"
+                android:layout_height="116dp"
                 android:src="@drawable/logo_profile_2"
                 android:layout_gravity="center"
                 android:layout_marginTop="68dp"/>
@@ -33,13 +36,13 @@
                 android:layout_marginLeft="31dp"/>
 
             <EditText
-                android:id="@+id/namaUser"
+                android:id="@+id/namaUserEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
+                android:inputType="textMultiLine"
+                android:layout_marginTop="3dp"
                 android:layout_marginLeft="29dp"
-                android:layout_marginRight="23dp"
-                android:editable="false"/>
+                android:layout_marginRight="23dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -54,13 +57,13 @@
                 android:layout_marginLeft="31dp"/>
 
             <EditText
-                android:id="@+id/emailUser"
+                android:id="@+id/emailUserEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
                 android:layout_marginTop="3dp"
                 android:layout_marginLeft="29dp"
-                android:layout_marginRight="23dp"
-                android:editable="false"/>
+                android:layout_marginRight="23dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -75,13 +78,13 @@
                 android:layout_marginLeft="31dp"/>
 
             <EditText
-                android:id="@+id/alamatUser"
+                android:id="@+id/alamatUserEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
                 android:layout_marginTop="3dp"
                 android:layout_marginLeft="29dp"
-                android:layout_marginRight="23dp"
-                android:editable="false"/>
+                android:layout_marginRight="23dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -96,13 +99,13 @@
                 android:layout_marginLeft="31dp"/>
 
             <EditText
-                android:id="@+id/phoneUser"
+                android:id="@+id/phoneUserEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
                 android:layout_marginTop="3dp"
                 android:layout_marginLeft="29dp"
-                android:layout_marginRight="23dp"
-                android:editable="false"/>
+                android:layout_marginRight="23dp"/>
 
 
             <RelativeLayout
@@ -110,11 +113,11 @@
                 android:layout_height="wrap_content">
 
                 <Button
-                    android:id="@+id/editUserBtn"
+                    android:id="@+id/simpanEditUserBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Edit Profile"
-                    android:layout_marginTop="18dp"
+                    android:text="SIMPAN"
+                    android:layout_marginTop="50dp"
                     android:layout_marginLeft="220dp"
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="23dp"/>
@@ -124,4 +127,5 @@
 
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

@@ -33,11 +33,11 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class SellerEditProfileActivity extends AppCompatActivity {
+public class UserEditProfileActivity extends AppCompatActivity {
 
     private CircleImageView mProfileImage;
-    private EditText mFullnameTxt, mAlamatTxt, mDeskripsiTxt, mPhoneTxt, mRtRwTxt;
-    private Button mEditBtn;
+    private EditText mFullnameTxt, mAlamatTxt, mEmailTxt, mPhoneTxt;
+    private Button mSimpanBtn;
 
     private Uri imageUri;
     private String myUrl = "";
@@ -48,34 +48,33 @@ public class SellerEditProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_seller_edit_profile);
+        setContentView(R.layout.activity_user_edit_profile);
 
-        storageProfilePrictureRef = FirebaseStorage.getInstance().getReference().child("Seller Profile Pictures");
+        storageProfilePrictureRef = FirebaseStorage.getInstance().getReference().child("Profile pictures");
 
-        mProfileImage = (CircleImageView) findViewById(R.id.sellerProfileImageEdit);
-        mFullnameTxt = (EditText) findViewById(R.id.namaSellerEdit);
-        mAlamatTxt = (EditText) findViewById(R.id.alamatSellerEdit);
-        mPhoneTxt = (EditText) findViewById(R.id.phoneSellerEdit);
-        mRtRwTxt = (EditText) findViewById(R.id.rtrwSellerEdit);
-        mDeskripsiTxt = (EditText) findViewById(R.id.deskripsiSellerEdit);
-        mEditBtn = (Button) findViewById(R.id.editSellerBtn);
+        mProfileImage = (CircleImageView) findViewById(R.id.imageUserEdit);
+        mFullnameTxt = (EditText) findViewById(R.id.namaUserEdit);
+        mEmailTxt = (EditText) findViewById(R.id.emailUserEdit);
+        mAlamatTxt = (EditText) findViewById(R.id.alamatUserEdit);
+        mPhoneTxt = (EditText) findViewById(R.id.phoneUserEdit);
+        mSimpanBtn = (Button) findViewById(R.id.simpanEditUserBtn);
 
-        userInfoDisplay(mProfileImage, mFullnameTxt, mAlamatTxt, mPhoneTxt, mRtRwTxt, mDeskripsiTxt);
+        userInfoDisplay(mProfileImage, mFullnameTxt, mEmailTxt, mAlamatTxt, mPhoneTxt);
 
 
-        mEditBtn.setOnClickListener(new View.OnClickListener() {
+        mSimpanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checker.equals("clicked"))
-                {
+
+                if (checker.equals("clicked")){
                     userInfoSaved();
                 }
-                else
-                {
+                else {
                     updateOnlyUserInfo();
                 }
             }
         });
+
 
         mProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,26 +83,25 @@ public class SellerEditProfileActivity extends AppCompatActivity {
 
                 CropImage.activity(imageUri)
                         .setAspectRatio(1, 1)
-                        .start(SellerEditProfileActivity.this);
+                        .start(UserEditProfileActivity.this);
             }
         });
     }
 
 
-    private void updateOnlyUserInfo()
-    {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Sellers");
+
+    private void updateOnlyUserInfo() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users");
 
         HashMap<String, Object> userMap = new HashMap<>();
         userMap. put("username", mFullnameTxt.getText().toString());
         userMap. put("alamat", mAlamatTxt.getText().toString());
         userMap. put("phoneOrder", mPhoneTxt.getText().toString());
-        userMap. put("rtrw", mRtRwTxt.getText().toString());
-        userMap. put("deskripsi", mDeskripsiTxt.getText().toString());
+        userMap. put("email", mEmailTxt.getText().toString());
         ref.child(Prevalent.currentOnlineUser.getPhone()).updateChildren(userMap);
 
-        startActivity(new Intent(SellerEditProfileActivity.this, MainActivity.class));
-        Toast.makeText(SellerEditProfileActivity.this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(UserEditProfileActivity.this, MainActivity.class));
+        Toast.makeText(this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
         finish();
     }
 
@@ -121,16 +119,15 @@ public class SellerEditProfileActivity extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(this, "Error, Try Again.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UserEditProfileActivity.this, "Error, Try Again.", Toast.LENGTH_SHORT).show();
 
-            startActivity(new Intent(SellerEditProfileActivity.this, SellerEditProfileActivity.class));
+            startActivity(new Intent(UserEditProfileActivity.this, UserProfileFragment.class));
             finish();
         }
     }
 
 
-    private void userInfoSaved()
-    {
+    private void userInfoSaved() {
         if (TextUtils.isEmpty(mFullnameTxt.getText().toString()))
         {
             Toast.makeText(this, "Name tidak boleh kosong!", Toast.LENGTH_SHORT).show();
@@ -139,17 +136,13 @@ public class SellerEditProfileActivity extends AppCompatActivity {
         {
             Toast.makeText(this, "Alamat tidak boleh kosong!", Toast.LENGTH_SHORT).show();
         }
+        else if (TextUtils.isEmpty(mEmailTxt.getText().toString()))
+        {
+            Toast.makeText(this, "Email tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+        }
         else if (TextUtils.isEmpty(mPhoneTxt.getText().toString()))
         {
             Toast.makeText(this, "No HP tidak boleh kosong!", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(mRtRwTxt.getText().toString()))
-        {
-            Toast.makeText(this, "RT/RW tidak boleh kosong!", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(mDeskripsiTxt.getText().toString()))
-        {
-            Toast.makeText(this, "Deskripsi tidak boleh kosong!", Toast.LENGTH_SHORT).show();
         }
         else if(checker.equals("clicked"))
         {
@@ -158,18 +151,18 @@ public class SellerEditProfileActivity extends AppCompatActivity {
     }
 
 
-    private void uploadImage()
-    {
+
+    private void uploadImage() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Update Profile");
-        progressDialog.setMessage("Please wait, while we are updating your account information");
+        progressDialog.setTitle("Update Profil");
+        progressDialog.setMessage("Mohon tunggu, data profil anda sedang diubah...");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
         if (imageUri != null)
         {
             final StorageReference fileRef = storageProfilePrictureRef
-                    .child(Prevalent.currentOnlineSeller.getPhone() + ".jpg");
+                    .child(Prevalent.currentOnlineUser.getPhone() + ".jpg");
 
             uploadTask = fileRef.putFile(imageUri);
 
@@ -194,27 +187,26 @@ public class SellerEditProfileActivity extends AppCompatActivity {
                                 Uri downloadUrl = (Uri) task.getResult();
                                 myUrl = downloadUrl.toString();
 
-                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Sellers");
+                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users");
 
                                 HashMap<String, Object> userMap = new HashMap<>();
                                 userMap. put("username", mFullnameTxt.getText().toString());
                                 userMap. put("alamat", mAlamatTxt.getText().toString());
                                 userMap. put("phoneOrder", mPhoneTxt.getText().toString());
-                                userMap. put("rtrw", mRtRwTxt.getText().toString());
-                                userMap. put("deskripsi", mDeskripsiTxt.getText().toString());
+                                userMap. put("email", mEmailTxt.getText().toString());
                                 userMap. put("image", myUrl);
-                                ref.child(Prevalent.currentOnlineSeller.getPhone()).updateChildren(userMap);
+                                ref.child(Prevalent.currentOnlineUser.getPhone()).updateChildren(userMap);
 
                                 progressDialog.dismiss();
 
-                                startActivity(new Intent(SellerEditProfileActivity.this, SellerMainActivity.class));
-                                Toast.makeText(SellerEditProfileActivity.this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(UserEditProfileActivity.this, MainActivity.class));
+                                Toast.makeText(UserEditProfileActivity.this, "Update profil berhasil!", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                             else
                             {
                                 progressDialog.dismiss();
-                                Toast.makeText(SellerEditProfileActivity.this, "Error.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(UserEditProfileActivity.this, "Error!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -226,10 +218,8 @@ public class SellerEditProfileActivity extends AppCompatActivity {
     }
 
 
-
-    private void userInfoDisplay(final CircleImageView mProfileImage, final EditText mFullnameTxt, final EditText mAlamatTxt, final EditText mPhoneTxt, final EditText mRtRwTxt, final EditText mDeskripsiTxt)
-    {
-        DatabaseReference UsersRef = FirebaseDatabase.getInstance().getReference().child("Sellers").child(Prevalent.currentOnlineSeller.getPhone());
+    private void userInfoDisplay(final CircleImageView mProfileImage, final EditText mFullnameTxt, final EditText mEmailTxt, final EditText mAlamatTxt, final EditText mPhoneTxt) {
+        DatabaseReference UsersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(Prevalent.currentOnlineUser.getPhone());
 
         UsersRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -240,24 +230,28 @@ public class SellerEditProfileActivity extends AppCompatActivity {
                     if (dataSnapshot.child("image").exists())
                     {
                         String image = dataSnapshot.child("image").getValue().toString();
-                        String name = dataSnapshot.child("username").getValue().toString();
+                        String username = dataSnapshot.child("username").getValue().toString();
+                        String email = dataSnapshot.child("email").getValue().toString();
                         String alamat = dataSnapshot.child("alamat").getValue().toString();
                         String phone = dataSnapshot.child("phone").getValue().toString();
-                        String rtrw = dataSnapshot.child("rtrw").getValue().toString();
-                        String deskripsi = dataSnapshot.child("deskripsi").getValue().toString();
+
 
                         Picasso.get().load(image).into(mProfileImage);
-                        mFullnameTxt.setText(name);
-                        mAlamatTxt.setText(phone);
-                        mPhoneTxt.setText(alamat);
-                        mRtRwTxt.setText(rtrw);
-                        mDeskripsiTxt.setText(deskripsi);
+                        mFullnameTxt.setText(username);
+                        mEmailTxt.setText(email);
+                        mAlamatTxt.setText(alamat);
+                        mPhoneTxt.setText(phone);
                     }
                     else {
-                        String name = dataSnapshot.child("username").getValue().toString();
+                        String username = dataSnapshot.child("username").getValue().toString();
+                        String email = dataSnapshot.child("email").getValue().toString();
+                        String alamat = dataSnapshot.child("alamat").getValue().toString();
                         String phone = dataSnapshot.child("phone").getValue().toString();
 
-                        mFullnameTxt.setText(name);
+
+                        mFullnameTxt.setText(username);
+                        mEmailTxt.setText(email);
+                        mAlamatTxt.setText(alamat);
                         mPhoneTxt.setText(phone);
                     }
                 }
@@ -269,5 +263,4 @@ public class SellerEditProfileActivity extends AppCompatActivity {
             }
         });
     }
-
 }

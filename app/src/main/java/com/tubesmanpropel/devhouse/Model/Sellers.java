@@ -1,20 +1,21 @@
 package com.tubesmanpropel.devhouse.Model;
 
-public class Users {
+public class Sellers {
 
-    private String username, password, email, phone, image, alamat;
+    private String username, password, email, phone, image, alamat, rtrw;
 
-    private Users(){
+    private Sellers(){
         //Empty Constructor
     }
 
-    public Users(String username, String password, String email, String phone, String image, String alamat) {
+    public Sellers(String username, String password, String email, String phone, String image, String alamat, String rtrw) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.phone = phone;
         this.image = image;
         this.alamat = alamat;
+        this.rtrw = rtrw;
     }
 
     public String getUsername() {
@@ -63,5 +64,13 @@ public class Users {
 
     public void setAlamat(String alamat) {
         this.alamat = alamat;
+    }
+
+    public String getRtrw() {
+        return rtrw;
+    }
+
+    public void setRtrw(String rtrw) {
+        this.rtrw = rtrw;
     }
 }

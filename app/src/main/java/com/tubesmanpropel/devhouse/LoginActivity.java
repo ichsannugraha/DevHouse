@@ -18,7 +18,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.rey.material.widget.CheckBox;
 import com.tubesmanpropel.devhouse.Model.Users;
+import com.tubesmanpropel.devhouse.Model.Sellers;
 import com.tubesmanpropel.devhouse.Prevalent.Prevalent;
 
 import io.paperdb.Paper;
@@ -29,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mUserPhone, mUserPassword;
     private TextView mUserLinkTxt, mSellerLinkTxt;
     private ProgressDialog loadingBar;
+    private CheckBox mSellerCheckBox;
 
     private String parentDbName = "Users";
 
@@ -41,33 +44,11 @@ public class LoginActivity extends AppCompatActivity {
         mSignUpBtn = (Button) findViewById(R.id.signUpBtn);
         mUserPhone = (EditText) findViewById(R.id.userPhone);
         mUserPassword = (EditText) findViewById(R.id.userPassword);
-        mUserLinkTxt = (TextView) findViewById(R.id.userLinkTxt);
-        mSellerLinkTxt = (TextView) findViewById(R.id.sellerLinkTxt);
+        mSellerCheckBox = (CheckBox) findViewById(R.id.sellerCheckBox);
 
         loadingBar = new ProgressDialog(this);
 
         Paper.init(this);
-
-
-        mSellerLinkTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSignInBtn.setText("Sign In Seller");
-                mSellerLinkTxt.setVisibility(View.INVISIBLE);
-                mUserLinkTxt.setVisibility(View.VISIBLE);
-                parentDbName = "Sellers";
-            }
-        });
-
-        mUserLinkTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSignInBtn.setText("Sign In");
-                mSellerLinkTxt.setVisibility(View.VISIBLE);
-                mUserLinkTxt.setVisibility(View.INVISIBLE);
-                parentDbName = "Users";
-            }
-        });
 
 
         mSignUpBtn.setOnClickListener(new View.OnClickListener() {
@@ -84,11 +65,29 @@ public class LoginActivity extends AppCompatActivity {
                 LoginUser();
             }
         });
+
+
+        String UserPhoneKey = Paper.book().read(Prevalent.UserPhoneKey);
+        String UserPasswordKey = Paper.book().read(Prevalent.UserPasswordKey);
+
+        if (UserPhoneKey != "" && UserPasswordKey != "")
+        {
+            if (!TextUtils.isEmpty(UserPhoneKey)  &&  !TextUtils.isEmpty(UserPasswordKey))
+            {
+                AllowAccess(UserPhoneKey, UserPasswordKey);
+
+                loadingBar.setTitle("Berhasil login!");
+                loadingBar.setMessage("Mohon tunggu.....");
+                loadingBar.setCanceledOnTouchOutside(false);
+                loadingBar.show();
+            }
+        }
     }
 
 
 
     private void LoginUser() {
+
         String phone = mUserPhone.getText().toString();
         String password = mUserPassword.getText().toString();
 
@@ -111,8 +110,17 @@ public class LoginActivity extends AppCompatActivity {
 
     private void AllowAccessToAccount(final String phone, final String password) {
 
-        Paper.book().write(Prevalent.UserPhoneKey, phone);
-        Paper.book().write(Prevalent.UserPasswordKey, password);
+        if (!mSellerCheckBox.isChecked()) {
+            parentDbName = "Users";
+            Paper.book().write(Prevalent.UserPhoneKey, phone);
+            Paper.book().write(Prevalent.UserPasswordKey, password);
+        }
+        else {
+            parentDbName = "Sellers";
+            Paper.book().write(Prevalent.SellerPhoneKey, phone);
+            Paper.book().write(Prevalent.SellerPasswordKey, password);
+        }
+
 
         final DatabaseReference RootRef;
         RootRef = FirebaseDatabase.getInstance().getReference();
@@ -125,6 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (dataSnapshot.child(parentDbName).child(phone).exists())
                 {
                     Users usersData = dataSnapshot.child(parentDbName).child(phone).getValue(Users.class);
+                    Sellers sellersData = dataSnapshot.child(parentDbName).child(phone).getValue(Sellers.class);
 
                     if (usersData.getPhone().equals(phone))
                     {
@@ -136,6 +145,7 @@ public class LoginActivity extends AppCompatActivity {
                                 loadingBar.dismiss();
 
                                 Intent intent = new Intent(LoginActivity.this, SellerMainActivity.class);
+                                Prevalent.currentOnlineSeller = sellersData;
                                 startActivity(intent);
                             }
                             else if (parentDbName.equals("Users"))
@@ -170,4 +180,49 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    private void AllowAccess(final String phone, final String password)
+    {
+        final DatabaseReference RootRef;
+        RootRef = FirebaseDatabase.getInstance().getReference();
+
+
+        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                if (dataSnapshot.child("Users").child(phone).exists())
+                {
+                    Users usersData = dataSnapshot.child("Users").child(phone).getValue(Users.class);
+
+                    if (usersData.getPhone().equals(phone))
+                    {
+                        if (usersData.getPassword().equals(password))
+                        {
+                            Toast.makeText(LoginActivity.this, "Mohon tunggu...", Toast.LENGTH_SHORT).show();
+                            loadingBar.dismiss();
+
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            Prevalent.currentOnlineUser = usersData;
+                            startActivity(intent);
+                        }
+                        else
+                        {
+                            loadingBar.dismiss();
+                            Toast.makeText(LoginActivity.this, "Password anda salah!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+                else
+                {
+                    Toast.makeText(LoginActivity.this, "Akun dengan no hp " + phone + " tidak valid!", Toast.LENGTH_SHORT).show();
+                    loadingBar.dismiss();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 }
