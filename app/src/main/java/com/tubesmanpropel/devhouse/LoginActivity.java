@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button mSignInBtn, mSignUpBtn;
     private EditText mUserPhone, mUserPassword;
-    private TextView mUserLinkTxt, mSellerLinkTxt;
+    private TextView mLupaPassword;
     private ProgressDialog loadingBar;
     private CheckBox mSellerCheckBox;
 
@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         mSignUpBtn = (Button) findViewById(R.id.signUpBtn);
         mUserPhone = (EditText) findViewById(R.id.userPhone);
         mUserPassword = (EditText) findViewById(R.id.userPassword);
+        mLupaPassword = (TextView) findViewById(R.id.lupaPasswordTxt);
         mSellerCheckBox = (CheckBox) findViewById(R.id.sellerCheckBox);
 
         loadingBar = new ProgressDialog(this);
@@ -76,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
             {
                 AllowAccess(UserPhoneKey, UserPasswordKey);
 
-                loadingBar.setTitle("Berhasil login!");
+                //loadingBar.setTitle("Berhasil login!");
                 loadingBar.setMessage("Mohon tunggu.....");
                 loadingBar.setCanceledOnTouchOutside(false);
                 loadingBar.show();
@@ -198,7 +199,7 @@ public class LoginActivity extends AppCompatActivity {
                     {
                         if (usersData.getPassword().equals(password))
                         {
-                            Toast.makeText(LoginActivity.this, "Mohon tunggu...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Selamat datang!", Toast.LENGTH_SHORT).show();
                             loadingBar.dismiss();
 
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);

@@ -21,7 +21,8 @@
                 android:layout_height="100dp"
                 android:layout_marginRight="23dp"
                 android:layout_marginLeft="23dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
 
                 <ImageView
                     android:id="@+id/gambarProduk1"
@@ -70,7 +71,7 @@
                 android:id="@+id/hargaProduk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
+                android:inputType="number"
                 android:layout_marginTop="3dp"
                 android:layout_marginLeft="29dp"
                 android:layout_marginRight="23dp"/>
@@ -154,7 +155,7 @@
                 android:id="@+id/luasTanahProduk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
+                android:inputType="number"
                 android:layout_marginTop="3dp"
                 android:layout_marginLeft="29dp"
                 android:layout_marginRight="23dp"/>

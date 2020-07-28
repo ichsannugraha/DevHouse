@@ -65,7 +65,6 @@ public class UserEditProfileActivity extends AppCompatActivity {
         mSimpanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (checker.equals("clicked")){
                     userInfoSaved();
                 }
@@ -110,18 +109,16 @@ public class UserEditProfileActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE  &&  resultCode==RESULT_OK  &&  data!=null)
-        {
+        if (requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE  &&  resultCode==RESULT_OK  &&  data!=null) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             imageUri = result.getUri();
 
             mProfileImage.setImageURI(imageUri);
         }
-        else
-        {
+        else {
             Toast.makeText(UserEditProfileActivity.this, "Error, Try Again.", Toast.LENGTH_SHORT).show();
 
-            startActivity(new Intent(UserEditProfileActivity.this, UserProfileFragment.class));
+            startActivity(new Intent(UserEditProfileActivity.this, UserEditProfileActivity.class));
             finish();
         }
     }
@@ -155,7 +152,7 @@ public class UserEditProfileActivity extends AppCompatActivity {
     private void uploadImage() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Update Profil");
-        progressDialog.setMessage("Mohon tunggu, data profil anda sedang diubah...");
+        progressDialog.setMessage("Mohon tunggu, data profil anda sedang diubah.");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
@@ -242,7 +239,7 @@ public class UserEditProfileActivity extends AppCompatActivity {
                         mAlamatTxt.setText(alamat);
                         mPhoneTxt.setText(phone);
                     }
-                    else {
+                    else if (dataSnapshot.child("alamat").exists()) {
                         String username = dataSnapshot.child("username").getValue().toString();
                         String email = dataSnapshot.child("email").getValue().toString();
                         String alamat = dataSnapshot.child("alamat").getValue().toString();
@@ -254,6 +251,16 @@ public class UserEditProfileActivity extends AppCompatActivity {
                         mAlamatTxt.setText(alamat);
                         mPhoneTxt.setText(phone);
                     }
+                    else {
+                        String username = dataSnapshot.child("username").getValue().toString();
+                        String email = dataSnapshot.child("email").getValue().toString();
+                        String phone = dataSnapshot.child("phone").getValue().toString();
+
+
+                        mFullnameTxt.setText(username);
+                        mEmailTxt.setText(email);
+                        mPhoneTxt.setText(phone);
+                    }
                 }
             }
 
@@ -263,4 +270,5 @@ public class UserEditProfileActivity extends AppCompatActivity {
             }
         });
     }
+
 }

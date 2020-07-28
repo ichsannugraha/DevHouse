@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,12 +35,14 @@ import com.tubesmanpropel.devhouse.Prevalent.Prevalent;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.paperdb.Paper;
 
 public class UserProfileFragment extends Fragment {
 
     private CircleImageView mProfileImage;
     private EditText mFullnameTxt, mAlamatTxt, mEmailTxt, mPhoneTxt;
-    private Button mEditBtn;
+    private Button mEditBtn, mUserLogoutBtn;
+    private TextView mRegisterSellerBtn;
 
     private Uri imageUri;
     private String myUrl = "";
@@ -60,6 +63,8 @@ public class UserProfileFragment extends Fragment {
         mAlamatTxt = (EditText) rootView.findViewById(R.id.alamatUser);
         mPhoneTxt = (EditText) rootView.findViewById(R.id.phoneUser);
         mEditBtn = (Button) rootView.findViewById(R.id.editUserBtn);
+        mUserLogoutBtn = (Button) rootView.findViewById(R.id.userLogoutBtn);
+        mRegisterSellerBtn = (TextView) rootView.findViewById(R.id.registerSeller);
 
         userInfoDisplay(mProfileImage, mFullnameTxt, mEmailTxt, mAlamatTxt, mPhoneTxt);
 
@@ -72,15 +77,21 @@ public class UserProfileFragment extends Fragment {
             }
         });
 
-
-        mProfileImage.setOnClickListener(new View.OnClickListener() {
+        mRegisterSellerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checker = "clicked";
+                Intent i = new Intent(getActivity(), SellerRegisterActivity.class);
+                startActivity(i);
+            }
+        });
 
-                CropImage.activity(imageUri)
-                        .setAspectRatio(1, 1)
-                        .start(getActivity());
+        mUserLogoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Paper.book().destroy();
+
+                Intent i = new Intent(getActivity(), LoginActivity.class);
+                startActivity(i);
             }
         });
 
@@ -114,7 +125,7 @@ public class UserProfileFragment extends Fragment {
                         mAlamatTxt.setText(alamat);
                         mPhoneTxt.setText(phone);
                     }
-                    else {
+                    else if (dataSnapshot.child("alamat").exists()) {
                         String username = dataSnapshot.child("username").getValue().toString();
                         String email = dataSnapshot.child("email").getValue().toString();
                         String alamat = dataSnapshot.child("alamat").getValue().toString();
@@ -126,6 +137,16 @@ public class UserProfileFragment extends Fragment {
                         mAlamatTxt.setText(alamat);
                         mPhoneTxt.setText(phone);
                     }
+                    else {
+                        String username = dataSnapshot.child("username").getValue().toString();
+                        String email = dataSnapshot.child("email").getValue().toString();
+                        String phone = dataSnapshot.child("phone").getValue().toString();
+
+
+                        mFullnameTxt.setText(username);
+                        mEmailTxt.setText(email);
+                        mPhoneTxt.setText(phone);
+                    }
                 }
             }
 
@@ -135,4 +156,5 @@ public class UserProfileFragment extends Fragment {
             }
         });
     }
+
 }

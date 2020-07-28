@@ -2,13 +2,13 @@ package com.tubesmanpropel.devhouse.Model;
 
 public class Products {
 
-    private String nama, harga, deskripsi, luasTanah, alamat, fasilitas, image, pid, date, time;
+    private String nama, harga, deskripsi, luasTanah, alamat, fasilitas, image, pid, date, time, sid, sname;
 
     public Products() {
         //Empty Constructor
     }
 
-    public Products(String nama, String harga, String deskripsi, String luasTanah, String alamat, String fasilitas, String image, String pid, String date, String time) {
+    public Products(String nama, String harga, String deskripsi, String luasTanah, String alamat, String fasilitas, String image, String pid, String date, String time, String sid, String sname) {
         this.nama = nama;
         this.harga = harga;
         this.deskripsi = deskripsi;
@@ -19,6 +19,8 @@ public class Products {
         this.pid = pid;
         this.date = date;
         this.time = time;
+        this.sid = sid;
+        this.sname = sname;
     }
 
     public String getNama() {
@@ -99,5 +101,21 @@ public class Products {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getSid() {
+        return sid;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
+    }
+
+    public String getSname() {
+        return sname;
+    }
+
+    public void setSname(String sname) {
+        this.sname = sname;
     }
 }

@@ -2,13 +2,13 @@ package com.tubesmanpropel.devhouse.Model;
 
 public class Sellers {
 
-    private String username, password, email, phone, image, alamat, rtrw;
+    private String username, password, email, phone, image, alamat, rtrw, imageKTP;
 
     private Sellers(){
         //Empty Constructor
     }
 
-    public Sellers(String username, String password, String email, String phone, String image, String alamat, String rtrw) {
+    public Sellers(String username, String password, String email, String phone, String image, String alamat, String rtrw, String imageKTP) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -16,6 +16,7 @@ public class Sellers {
         this.image = image;
         this.alamat = alamat;
         this.rtrw = rtrw;
+        this.imageKTP = imageKTP;
     }
 
     public String getUsername() {
@@ -72,5 +73,13 @@ public class Sellers {
 
     public void setRtrw(String rtrw) {
         this.rtrw = rtrw;
+    }
+
+    public String getImageKTP() {
+        return imageKTP;
+    }
+
+    public void setImageKTP(String imageKTP) {
+        this.imageKTP = imageKTP;
     }
 }

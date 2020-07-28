@@ -42,7 +42,7 @@ public class SellerEditProfileActivity extends AppCompatActivity {
     private Uri imageUri;
     private String myUrl = "";
     private StorageTask uploadTask;
-    private StorageReference storageProfilePrictureRef;
+    private StorageReference storageProfilePictureRef;
     private String checker = "";
 
     @Override
@@ -50,7 +50,7 @@ public class SellerEditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller_edit_profile);
 
-        storageProfilePrictureRef = FirebaseStorage.getInstance().getReference().child("Seller Profile Pictures");
+        storageProfilePictureRef = FirebaseStorage.getInstance().getReference().child("Seller Profile Pictures");
 
         mProfileImage = (CircleImageView) findViewById(R.id.sellerProfileImageEdit);
         mFullnameTxt = (EditText) findViewById(R.id.namaSellerEdit);
@@ -106,6 +106,7 @@ public class SellerEditProfileActivity extends AppCompatActivity {
         Toast.makeText(SellerEditProfileActivity.this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
         finish();
     }
+
 
 
     @Override
@@ -168,7 +169,7 @@ public class SellerEditProfileActivity extends AppCompatActivity {
 
         if (imageUri != null)
         {
-            final StorageReference fileRef = storageProfilePrictureRef
+            final StorageReference fileRef = storageProfilePictureRef
                     .child(Prevalent.currentOnlineSeller.getPhone() + ".jpg");
 
             uploadTask = fileRef.putFile(imageUri);
@@ -248,8 +249,8 @@ public class SellerEditProfileActivity extends AppCompatActivity {
 
                         Picasso.get().load(image).into(mProfileImage);
                         mFullnameTxt.setText(name);
-                        mAlamatTxt.setText(phone);
-                        mPhoneTxt.setText(alamat);
+                        mAlamatTxt.setText(alamat);
+                        mPhoneTxt.setText(phone);
                         mRtRwTxt.setText(rtrw);
                         mDeskripsiTxt.setText(deskripsi);
                     }

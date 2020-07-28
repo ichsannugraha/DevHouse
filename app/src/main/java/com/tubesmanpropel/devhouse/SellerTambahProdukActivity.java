@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.tubesmanpropel.devhouse.Prevalent.Prevalent;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -218,6 +219,8 @@ public class SellerTambahProdukActivity extends AppCompatActivity {
         productMap.put("alamat", alamatProd);
         productMap.put("harga", hargaProd);
         productMap.put("nama", namaProd);
+        productMap.put("sid", Prevalent.currentOnlineSeller.getPhone());
+        productMap.put("sname", Prevalent.currentOnlineSeller.getUsername());
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

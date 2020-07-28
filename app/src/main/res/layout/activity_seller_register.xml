@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".SignUpActivity">
+    tools:context=".SellerRegisterActivity"
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
                 android:layout_height="174dp"
                 android:src="@drawable/logo_devhouse"
                 android:layout_gravity="center"
-                android:layout_marginTop="105sp"/>
+                android:layout_marginTop="37dp"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/usernameTxt"
+                    android:id="@+id/usernameSellerTxt"
                     android:inputType="text"
                     android:hint="Username"
                     android:textSize="18sp"/>
@@ -53,7 +53,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/passwordTxt"
+                    android:id="@+id/passwordSellerTxt"
                     android:inputType="textPassword"
                     android:hint="Password"
                     android:textSize="18sp"/>
@@ -70,7 +70,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/emailTxt"
+                    android:id="@+id/emailSellerTxt"
                     android:inputType="textEmailAddress"
                     android:hint="Email"
                     android:textSize="18sp"/>
@@ -87,12 +87,38 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/phoneTxt"
-                    android:inputType="number"
-                    android:hint="No HP"
+                    android:id="@+id/phoneSellerTxt"
                     android:maxLength="12"
-                    android:textSize="18sp"/>
+                    android:hint="No HP"
+                    android:textSize="18sp"
+                    android:editable="false"/>
             </com.google.android.material.textfield.TextInputLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:id="@+id/fotoKTP"
+                    android:src="@drawable/logo_add_photo"
+                    android:layout_width="123dp"
+                    android:layout_height="123dp"
+                    android:layout_marginLeft="30sp"/>
+
+                <TextView
+                    android:text="Foto KTP"
+                    android:textSize="22sp"
+                    android:layout_width="123dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_below="@id/fotoKTP"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="30dp"/>
+
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -102,13 +128,13 @@
                 android:gravity="right">
 
                 <Button
-                    android:id="@+id/signUp"
+                    android:id="@+id/registerSellerBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sign Up"
                     android:layout_marginRight="20sp"/>
-            </LinearLayout>
 
+            </LinearLayout>
 
         </LinearLayout>
 
