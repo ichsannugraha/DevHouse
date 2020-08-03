@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                 AllowAccess(UserPhoneKey, UserPasswordKey);
 
                 //loadingBar.setTitle("Berhasil login!");
-                loadingBar.setMessage("Mohon tunggu.....");
+                //loadingBar.setMessage("Mohon tunggu.....");
                 loadingBar.setCanceledOnTouchOutside(false);
                 loadingBar.show();
             }
@@ -99,8 +99,8 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Masukkan password anda!", Toast.LENGTH_SHORT).show();
         }
         else {
-            loadingBar.setTitle("Sedang Login");
-            loadingBar.setMessage("Mohon tunggu...");
+            //loadingBar.setTitle("Sedang Login");
+            //loadingBar.setMessage("Mohon tunggu...");
             loadingBar.setCanceledOnTouchOutside(false);
             loadingBar.show();
 
@@ -199,7 +199,7 @@ public class LoginActivity extends AppCompatActivity {
                     {
                         if (usersData.getPassword().equals(password))
                         {
-                            Toast.makeText(LoginActivity.this, "Selamat datang!", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(LoginActivity.this, "Selamat datang!", Toast.LENGTH_SHORT).show();
                             loadingBar.dismiss();
 
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -209,13 +209,13 @@ public class LoginActivity extends AppCompatActivity {
                         else
                         {
                             loadingBar.dismiss();
-                            Toast.makeText(LoginActivity.this, "Password anda salah!", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(LoginActivity.this, "Password anda salah!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
                 else
                 {
-                    Toast.makeText(LoginActivity.this, "Akun dengan no hp " + phone + " tidak valid!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LoginActivity.this, "Akun dengan no hp " + phone + " tidak valid!", Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
                 }
             }
@@ -225,5 +225,13 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        finishAffinity();
     }
 }

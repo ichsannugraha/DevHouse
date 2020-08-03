@@ -69,7 +69,7 @@ public class UserEditProfileActivity extends AppCompatActivity {
                     userInfoSaved();
                 }
                 else {
-                    updateOnlyUserInfo();
+                    validateInfo();
                 }
             }
         });
@@ -100,7 +100,7 @@ public class UserEditProfileActivity extends AppCompatActivity {
         ref.child(Prevalent.currentOnlineUser.getPhone()).updateChildren(userMap);
 
         startActivity(new Intent(UserEditProfileActivity.this, MainActivity.class));
-        Toast.makeText(this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Berhasil mengupdate info profile!", Toast.LENGTH_SHORT).show();
         finish();
     }
 
@@ -124,10 +124,33 @@ public class UserEditProfileActivity extends AppCompatActivity {
     }
 
 
+    private void validateInfo() {
+        if (TextUtils.isEmpty(mFullnameTxt.getText().toString()))
+        {
+            Toast.makeText(this, "Nama tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(mAlamatTxt.getText().toString()))
+        {
+            Toast.makeText(this, "Alamat tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(mEmailTxt.getText().toString()))
+        {
+            Toast.makeText(this, "Email tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(mPhoneTxt.getText().toString()))
+        {
+            Toast.makeText(this, "No HP tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            updateOnlyUserInfo();
+        }
+    }
+
+
     private void userInfoSaved() {
         if (TextUtils.isEmpty(mFullnameTxt.getText().toString()))
         {
-            Toast.makeText(this, "Name tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Nama tidak boleh kosong!", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(mAlamatTxt.getText().toString()))
         {
@@ -151,7 +174,7 @@ public class UserEditProfileActivity extends AppCompatActivity {
 
     private void uploadImage() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Update Profil");
+        progressDialog.setTitle("Update Profile");
         progressDialog.setMessage("Mohon tunggu, data profil anda sedang diubah.");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
@@ -197,7 +220,7 @@ public class UserEditProfileActivity extends AppCompatActivity {
                                 progressDialog.dismiss();
 
                                 startActivity(new Intent(UserEditProfileActivity.this, MainActivity.class));
-                                Toast.makeText(UserEditProfileActivity.this, "Update profil berhasil!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(UserEditProfileActivity.this, "Update profile berhasil!", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                             else
@@ -210,7 +233,7 @@ public class UserEditProfileActivity extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(this, "image is not selected.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Gambar tidak terpilih!", Toast.LENGTH_SHORT).show();
         }
     }
 

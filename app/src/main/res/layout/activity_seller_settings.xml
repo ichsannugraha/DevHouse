@@ -5,8 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SellerSettingsActivity"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:elevation="5dp"
+        android:backgroundTint="@color/colorPrimary">
+
+        <ImageView
+            android:src="@drawable/ic_arrow_back_black_24dp"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:text="Menu Seller"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="18dp"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="25dp"/>
+
+    </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/tambahProdukCV"
@@ -86,7 +109,7 @@
                 android:layout_marginRight="18dp"/>
 
             <TextView
-                android:id="@+id/editProfileTxtTxt"
+                android:id="@+id/editProfileTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Edit Profile"
@@ -109,7 +132,60 @@
                 android:fontFamily="Roboto"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="10dp"
-                android:layout_below="@id/editProfileTxtTxt"/>
+                android:layout_below="@id/editProfileTxt"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/logoutProfileCV"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="3dp"
+        app:cardUseCompatPadding="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="17dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/logo_start"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="18dp"/>
+
+            <TextView
+                android:id="@+id/logoutProfileTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:textSize="14sp"
+                android:lineHeight="14sp"
+                android:textStyle="normal"
+                android:textColor="#000000"
+                android:fontFamily="Roboto"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Keluar akun seller"
+                android:textSize="14sp"
+                android:lineHeight="14sp"
+                android:textStyle="normal"
+                android:textColor="#000000"
+                android:fontFamily="Roboto"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/logoutProfileTxt"/>
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

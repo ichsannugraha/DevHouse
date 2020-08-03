@@ -1,5 +1,7 @@
 package com.tubesmanpropel.devhouse.ViewHolder;
 
+import android.media.Image;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,7 +14,7 @@ import com.tubesmanpropel.devhouse.R;
 public class ProductViewHolderMain extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     public TextView namaProdukTxt, hargaProdukTxt;
-    public ImageView imageView;
+    public ImageView imageView, editImageBtn;
     public ItemClickListner listner;
 
 
@@ -23,6 +25,7 @@ public class ProductViewHolderMain extends RecyclerView.ViewHolder implements Vi
         imageView = (ImageView) itemView.findViewById(R.id.imageRumahMain);
         namaProdukTxt = (TextView) itemView.findViewById(R.id.namaProdukMain);
         hargaProdukTxt = (TextView) itemView.findViewById(R.id.hargaProdukMain);
+        editImageBtn = (ImageView) itemView.findViewById(R.id.editProdukMainBtn);
     }
 
     public void setItemClickListner(ItemClickListner listner)

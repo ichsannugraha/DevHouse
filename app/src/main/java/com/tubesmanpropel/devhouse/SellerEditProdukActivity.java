@@ -90,13 +90,19 @@ public class SellerEditProdukActivity extends AppCompatActivity {
             public void onClick(View v) {
                 checker = "clicked";
 
-                CropImage.activity(imageUri)
-                        .setAspectRatio(1, 1)
-                        .start(SellerEditProdukActivity.this);
+                openGallery();
             }
         });
     }
 
+
+
+    private void openGallery() {
+        Intent galleryIntent = new Intent();
+        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+        galleryIntent.setType("image/*");
+        startActivityForResult(galleryIntent, GalleryPick);
+    }
 
 
     private void updateOnlyProductInfo(String idProduk) {
@@ -112,7 +118,7 @@ public class SellerEditProdukActivity extends AppCompatActivity {
         ref.child(idProduk).updateChildren(productMap);
 
         startActivity(new Intent(SellerEditProdukActivity.this, SellerMainActivity.class));
-        Toast.makeText(this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Berhasil mengupdate info produk!", Toast.LENGTH_SHORT).show();
         finish();
     }
 
@@ -121,17 +127,10 @@ public class SellerEditProdukActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE  &&  resultCode==RESULT_OK  &&  data!=null) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            imageUri = result.getUri();
-
+        if (requestCode==GalleryPick  &&  resultCode==RESULT_OK  &&  data!=null)
+        {
+            imageUri = data.getData();
             mGambarProduk.setImageURI(imageUri);
-        }
-        else {
-            Toast.makeText(SellerEditProdukActivity.this, "Error, Try Again.", Toast.LENGTH_SHORT).show();
-
-            startActivity(new Intent(SellerEditProdukActivity.this, SellerEditProdukActivity.class));
-            finish();
         }
     }
 
@@ -139,7 +138,7 @@ public class SellerEditProdukActivity extends AppCompatActivity {
     private void productInfoSaved() {
         if (TextUtils.isEmpty(mNamaProduk.getText().toString()))
         {
-            Toast.makeText(this, "Name tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Nama tidak boleh kosong!", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(mHargaProduk.getText().toString()))
         {
@@ -171,7 +170,7 @@ public class SellerEditProdukActivity extends AppCompatActivity {
     private void uploadImage(final String idProduk) {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Update Produk");
-        progressDialog.setMessage("Mohon tunggu, data produk anda sedang diubah.");
+        progressDialog.setMessage("Mohon tunggu, data produk anda sedang diubah...");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
@@ -231,7 +230,7 @@ public class SellerEditProdukActivity extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(this, "image is not selected.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "gambar tidak terpilih!", Toast.LENGTH_SHORT).show();
         }
     }
 

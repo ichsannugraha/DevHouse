@@ -141,8 +141,8 @@ public class SellerTambahProdukActivity extends AppCompatActivity {
 
 
     private void StoreProductInformation() {
-        loadingBar.setTitle("Add New Product");
-        loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
+        loadingBar.setTitle("Sedang menambah produk");
+        loadingBar.setMessage("Mohon tunggu sebentar...");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
 
@@ -174,7 +174,7 @@ public class SellerTambahProdukActivity extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
             {
-                Toast.makeText(SellerTambahProdukActivity.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SellerTambahProdukActivity.this, "Berhasil mengunggah gambar produk!", Toast.LENGTH_SHORT).show();
 
                 Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
@@ -195,8 +195,6 @@ public class SellerTambahProdukActivity extends AppCompatActivity {
                         if (task.isSuccessful())
                         {
                             downloadImageUrl = task.getResult().toString();
-
-                            Toast.makeText(SellerTambahProdukActivity.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
 
                             SaveProductInfoToDatabase();
                         }
@@ -220,7 +218,6 @@ public class SellerTambahProdukActivity extends AppCompatActivity {
         productMap.put("harga", hargaProd);
         productMap.put("nama", namaProd);
         productMap.put("sid", Prevalent.currentOnlineSeller.getPhone());
-        productMap.put("sname", Prevalent.currentOnlineSeller.getUsername());
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -233,7 +230,7 @@ public class SellerTambahProdukActivity extends AppCompatActivity {
                             startActivity(intent);
 
                             loadingBar.dismiss();
-                            Toast.makeText(SellerTambahProdukActivity.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SellerTambahProdukActivity.this, "Berhasil menambah produk!", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {

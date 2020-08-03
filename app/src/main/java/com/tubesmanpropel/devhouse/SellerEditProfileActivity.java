@@ -72,7 +72,7 @@ public class SellerEditProfileActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    updateOnlyUserInfo();
+                    validateInfo();
                 }
             }
         });
@@ -100,10 +100,10 @@ public class SellerEditProfileActivity extends AppCompatActivity {
         userMap. put("phoneOrder", mPhoneTxt.getText().toString());
         userMap. put("rtrw", mRtRwTxt.getText().toString());
         userMap. put("deskripsi", mDeskripsiTxt.getText().toString());
-        ref.child(Prevalent.currentOnlineUser.getPhone()).updateChildren(userMap);
+        ref.child(Prevalent.currentOnlineSeller.getPhone()).updateChildren(userMap);
 
-        startActivity(new Intent(SellerEditProfileActivity.this, MainActivity.class));
-        Toast.makeText(SellerEditProfileActivity.this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(SellerEditProfileActivity.this, SellerMainActivity.class));
+        Toast.makeText(SellerEditProfileActivity.this, "Berhasil update info profile!", Toast.LENGTH_SHORT).show();
         finish();
     }
 
@@ -122,7 +122,7 @@ public class SellerEditProfileActivity extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(this, "Error, Try Again.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show();
 
             startActivity(new Intent(SellerEditProfileActivity.this, SellerEditProfileActivity.class));
             finish();
@@ -130,8 +130,34 @@ public class SellerEditProfileActivity extends AppCompatActivity {
     }
 
 
-    private void userInfoSaved()
-    {
+    private void validateInfo(){
+        if (TextUtils.isEmpty(mFullnameTxt.getText().toString()))
+        {
+            Toast.makeText(this, "Name tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(mAlamatTxt.getText().toString()))
+        {
+            Toast.makeText(this, "Alamat tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(mPhoneTxt.getText().toString()))
+        {
+            Toast.makeText(this, "No HP tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(mRtRwTxt.getText().toString()))
+        {
+            Toast.makeText(this, "RT/RW tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(mDeskripsiTxt.getText().toString()))
+        {
+            Toast.makeText(this, "Deskripsi tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            updateOnlyUserInfo();
+        }
+    }
+
+
+    private void userInfoSaved() {
         if (TextUtils.isEmpty(mFullnameTxt.getText().toString()))
         {
             Toast.makeText(this, "Name tidak boleh kosong!", Toast.LENGTH_SHORT).show();
@@ -163,7 +189,7 @@ public class SellerEditProfileActivity extends AppCompatActivity {
     {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Update Profile");
-        progressDialog.setMessage("Please wait, while we are updating your account information");
+        progressDialog.setMessage("Data profile anda sedang diubah...");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
@@ -209,7 +235,7 @@ public class SellerEditProfileActivity extends AppCompatActivity {
                                 progressDialog.dismiss();
 
                                 startActivity(new Intent(SellerEditProfileActivity.this, SellerMainActivity.class));
-                                Toast.makeText(SellerEditProfileActivity.this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SellerEditProfileActivity.this, "Update info profile berhasil!", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                             else
@@ -222,7 +248,7 @@ public class SellerEditProfileActivity extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(this, "image is not selected.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "gambar tidak terpilih!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -248,6 +274,20 @@ public class SellerEditProfileActivity extends AppCompatActivity {
                         String deskripsi = dataSnapshot.child("deskripsi").getValue().toString();
 
                         Picasso.get().load(image).into(mProfileImage);
+                        mFullnameTxt.setText(name);
+                        mAlamatTxt.setText(alamat);
+                        mPhoneTxt.setText(phone);
+                        mRtRwTxt.setText(rtrw);
+                        mDeskripsiTxt.setText(deskripsi);
+                    }
+                    else if (dataSnapshot.child("alamat").exists()) {
+                        String name = dataSnapshot.child("username").getValue().toString();
+                        String alamat = dataSnapshot.child("alamat").getValue().toString();
+                        String phone = dataSnapshot.child("phone").getValue().toString();
+                        String rtrw = dataSnapshot.child("rtrw").getValue().toString();
+                        String deskripsi = dataSnapshot.child("deskripsi").getValue().toString();
+
+
                         mFullnameTxt.setText(name);
                         mAlamatTxt.setText(alamat);
                         mPhoneTxt.setText(phone);

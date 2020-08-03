@@ -23,6 +23,8 @@ import com.squareup.picasso.Picasso;
 import com.tubesmanpropel.devhouse.Model.Products;
 import com.tubesmanpropel.devhouse.ViewHolder.ProductViewHolderMain;
 
+import java.text.DecimalFormat;
+
 public class UserSearchActivity extends AppCompatActivity {
 
     private EditText inputTxt;
@@ -64,15 +66,16 @@ public class UserSearchActivity extends AppCompatActivity {
 
         FirebaseRecyclerOptions<Products> options =
                 new FirebaseRecyclerOptions.Builder<Products>()
-                .setQuery(reference.orderByChild("nama").startAt(searchInput), Products.class)
+                .setQuery(reference.orderByChild("nama").startAt(searchInput).endAt(searchInput + "\uf8ff"), Products.class)
                 .build();
 
         FirebaseRecyclerAdapter<Products, ProductViewHolderMain> adapter =
                 new FirebaseRecyclerAdapter<Products, ProductViewHolderMain>(options) {
                     @Override
                     protected void onBindViewHolder(@NonNull ProductViewHolderMain holder, int i, @NonNull final Products model) {
+                        holder.editImageBtn.setVisibility(View.INVISIBLE);
                         holder.namaProdukTxt.setText(model.getNama());
-                        holder.hargaProdukTxt.setText("Rp." + model.getHarga());
+                        holder.hargaProdukTxt.setText("Rp. " + formatNumber(model.getHarga()));
                         Picasso.get().load(model.getImage()).fit().centerCrop().into(holder.imageView);
 
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +84,7 @@ public class UserSearchActivity extends AppCompatActivity {
                                 Intent i = new Intent(UserSearchActivity.this, ProductDetailsActivity.class);
                                 i.putExtra("idProduk", model.getPid());
                                 i.putExtra("sid", model.getSid());
+                                i.putExtra("userType", "User");
                                 startActivity(i);
                             }
                         });
@@ -97,5 +101,20 @@ public class UserSearchActivity extends AppCompatActivity {
                 };
         searchList.setAdapter(adapter);
         adapter.startListening();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent i = new Intent(UserSearchActivity.this, MainActivity.class);
+        startActivity(i);
+    }
+
+
+    private static String formatNumber(String number) {
+        DecimalFormat formatter = new DecimalFormat("###,###,##0");
+        return formatter.format(Double.parseDouble(number));
     }
 }

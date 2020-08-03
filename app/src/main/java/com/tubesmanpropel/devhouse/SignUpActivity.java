@@ -60,16 +60,16 @@ public class SignUpActivity extends AppCompatActivity {
         String phone = mPhoneTxt.getText().toString();
 
         if (TextUtils.isEmpty(username)) {
-            Toast.makeText(this, "Masukkan username anda...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Masukkan username anda!", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Masukkan password anda...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Masukkan password anda!", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(email)) {
-            Toast.makeText(this, "Masukkan email anda...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Masukkan email anda!", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(phone)) {
-            Toast.makeText(this, "Masukkan no hp anda...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Masukkan no hp anda!", Toast.LENGTH_SHORT).show();
         }
         else {
             loadingBar.setTitle("Membuat Akun");
@@ -101,7 +101,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(SignUpActivity.this, "Akun berhasil dibuat.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SignUpActivity.this, "Akun berhasil dibuat!", Toast.LENGTH_SHORT).show();
                                         loadingBar.dismiss();
 
                                         Intent i = new Intent(SignUpActivity.this, LoginActivity.class);
@@ -109,16 +109,16 @@ public class SignUpActivity extends AppCompatActivity {
                                     }
                                     else {
                                         loadingBar.dismiss();
-                                        Toast.makeText(SignUpActivity.this, "Terjadi kesalahan, silakan coba kembali...", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SignUpActivity.this, "Terjadi kesalahan, silakan coba kembali!", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
                 }
                 else
                 {
-                    Toast.makeText(SignUpActivity.this, "Nomor HP " + phone + " sudah terpakai.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Nomor HP " + phone + " sudah terpakai!", Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
-                    Toast.makeText(SignUpActivity.this, "Silakan gunakan nomor yang lain", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Silakan gunakan nomor yang lain!", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                     startActivity(intent);

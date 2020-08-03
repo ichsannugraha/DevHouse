@@ -145,6 +145,11 @@ public class SellerRegisterActivity extends AppCompatActivity {
 
     private void StoreSellerInformation(final String namaSeller, final String passwordSeller, final String emailSeller, final String phoneSeller) {
 
+        loadingBar.setTitle("Membuat Akun Seller");
+        loadingBar.setMessage("Mohon Tunggu Sebentar...");
+        loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar.show();
+
         final StorageReference filePath = storageSellerKTPRef.child(imageUri.getLastPathSegment() + phoneSeller + ".jpg");
 
         final UploadTask uploadTask = filePath.putFile(imageUri);
@@ -162,7 +167,7 @@ public class SellerRegisterActivity extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
             {
-                Toast.makeText(SellerRegisterActivity.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SellerRegisterActivity.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
 
                 Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
@@ -184,7 +189,7 @@ public class SellerRegisterActivity extends AppCompatActivity {
                         {
                             downloadImageUrl = task.getResult().toString();
 
-                            Toast.makeText(SellerRegisterActivity.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(SellerRegisterActivity.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
 
                             SaveSellerInfoToDatabase(namaSeller, passwordSeller, emailSeller, phoneSeller);
                         }
@@ -216,7 +221,7 @@ public class SellerRegisterActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(SellerRegisterActivity.this, "Akun berhasil dibuat.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SellerRegisterActivity.this, "Akun seller berhasil dibuat!", Toast.LENGTH_SHORT).show();
                                         loadingBar.dismiss();
 
                                         Intent i = new Intent(SellerRegisterActivity.this, MainActivity.class);
@@ -224,18 +229,18 @@ public class SellerRegisterActivity extends AppCompatActivity {
                                     }
                                     else {
                                         loadingBar.dismiss();
-                                        Toast.makeText(SellerRegisterActivity.this, "Terjadi kesalahan, silakan coba kembali...", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SellerRegisterActivity.this, "Terjadi kesalahan, silakan coba kembali!", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
                 }
                 else
                 {
-                    Toast.makeText(SellerRegisterActivity.this, "Nomor HP " + phoneSeller + " sudah terpakai.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SellerRegisterActivity.this, "Akun anda sudah memiliki akun seller!", Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
-                    Toast.makeText(SellerRegisterActivity.this, "Silakan gunakan nomor yang lain", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SellerRegisterActivity.this, "Gagal membuat akun seller!", Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(SellerRegisterActivity.this, UserHomeFragment.class);
+                    Intent intent = new Intent(SellerRegisterActivity.this, MainActivity.class);
                     startActivity(intent);
                 }
             }

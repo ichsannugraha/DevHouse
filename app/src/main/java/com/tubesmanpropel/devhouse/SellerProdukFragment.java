@@ -20,8 +20,11 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.tubesmanpropel.devhouse.Model.Products;
 import com.tubesmanpropel.devhouse.Prevalent.Prevalent;
@@ -53,9 +56,10 @@ public class SellerProdukFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
+
         FirebaseRecyclerOptions<Products> options =
                 new FirebaseRecyclerOptions.Builder<Products>()
-                .setQuery(ProductsRef, Products.class)
+                .setQuery(ProductsRef.orderByChild("sid").startAt(Prevalent.currentOnlineSeller.getPhone()).endAt(Prevalent.currentOnlineSeller.getPhone()), Products.class)
                 .build();
 
 
@@ -84,6 +88,8 @@ public class SellerProdukFragment extends Fragment {
                                         if (which==0) {
                                             Intent i = new Intent(getActivity(), ProductDetailsActivity.class);
                                             i.putExtra("idProduk", model.getPid());
+                                            i.putExtra("sid", model.getSid());
+                                            i.putExtra("namaProduk", model.getNama());
                                             startActivity(i);
                                         }
                                         if (which==1) {

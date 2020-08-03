@@ -7,11 +7,6 @@
         android:icon="@drawable/logo_home"/>
 
     <item
-        android:title="Feed"
-        android:id="@+id/nav_feed"
-        android:icon="@drawable/ic_image_black_24dp"/>
-
-    <item
         android:title="Favorite"
         android:id="@+id/nav_favorite"
         android:icon="@drawable/logo_favorite"/>

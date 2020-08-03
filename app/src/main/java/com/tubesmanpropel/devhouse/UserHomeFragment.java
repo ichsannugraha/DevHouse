@@ -27,6 +27,8 @@ import com.squareup.picasso.Picasso;
 import com.tubesmanpropel.devhouse.Model.Products;
 import com.tubesmanpropel.devhouse.ViewHolder.ProductViewHolderMain;
 
+import java.text.DecimalFormat;
+
 public class UserHomeFragment extends Fragment {
 
     private SliderLayout sliderLayout;
@@ -45,13 +47,8 @@ public class UserHomeFragment extends Fragment {
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
 
         searchView = rootView.findViewById(R.id.mainSearchView);
-
-        sliderLayout = rootView.findViewById(R.id.imageSlider);
-        sliderLayout.setIndicatorAnimation(IndicatorAnimations.FILL);
-        sliderLayout.setScrollTimeInSec(2);
-        setSliderViews();
-
         recyclerView = rootView.findViewById(R.id.userRecyclerView);
+
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
@@ -72,7 +69,7 @@ public class UserHomeFragment extends Fragment {
 
         FirebaseRecyclerOptions<Products> options =
                 new FirebaseRecyclerOptions.Builder<Products>()
-                        .setQuery(ProductsRef.orderByChild("pid"), Products.class)
+                        .setQuery(ProductsRef.orderByChild("time"), Products.class)
                         .build();
 
 
@@ -80,8 +77,9 @@ public class UserHomeFragment extends Fragment {
                 new FirebaseRecyclerAdapter<Products, ProductViewHolderMain>(options) {
                     @Override
                     protected void onBindViewHolder(@NonNull ProductViewHolderMain holder, int i, @NonNull final Products model) {
+                        holder.editImageBtn.setVisibility(View.INVISIBLE);
                         holder.namaProdukTxt.setText(model.getNama());
-                        holder.hargaProdukTxt.setText("Rp." + model.getHarga());
+                        holder.hargaProdukTxt.setText("Rp." + formatNumber(model.getHarga()));
                         Picasso.get().load(model.getImage()).fit().centerCrop().into(holder.imageView);
 
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +88,7 @@ public class UserHomeFragment extends Fragment {
                                 Intent i = new Intent(getActivity(), ProductDetailsActivity.class);
                                 i.putExtra("idProduk", model.getPid());
                                 i.putExtra("sid", model.getSid());
-                                //i.putExtra("namaProduk", model.getNama());
+                                i.putExtra("userType", "User");
                                 //i.putExtra("hargaProduk", model.getHarga());
                                 //i.putExtra("deskripsiProduk", model.getDeskripsi());
                                 startActivity(i);
@@ -112,37 +110,8 @@ public class UserHomeFragment extends Fragment {
     }
 
 
-    private void setSliderViews(){
-        for (int i = 0; i <= 4; i++){
-            DefaultSliderView sliderView = new DefaultSliderView(getActivity());
-
-            switch (i) {
-                case 0:
-                    sliderView.setImageDrawable(R.drawable.image_rumah);
-                    break;
-                case 1:
-                    sliderView.setImageDrawable(R.drawable.image_rumah);
-                    break;
-                case 2:
-                    sliderView.setImageDrawable(R.drawable.image_rumah);
-                    break;
-                case 3:
-                    sliderView.setImageDrawable(R.drawable.image_rumah);
-                    break;
-                case 4:
-                    sliderView.setImageDrawable(R.drawable.image_rumah);
-                    break;
-            }
-
-            sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
-            final int finalI = i;
-            sliderView.setOnSliderClickListener(new SliderView.OnSliderClickListener() {
-                @Override
-                public void onSliderClick(SliderView sliderView) {
-                    //Toast.makeText(HomeFragment.this, "This is a slider" + (finalI + 1);
-                }
-            });
-            sliderLayout.addSliderView(sliderView);
-        }
+    private static String formatNumber(String number) {
+        DecimalFormat formatter = new DecimalFormat("###,###,##0");
+        return formatter.format(Double.parseDouble(number));
     }
 }

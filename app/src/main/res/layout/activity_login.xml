@@ -5,118 +5,135 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="167dp"
-            android:layout_height="174dp"
-            android:src="@drawable/logo_devhouse"
-            android:layout_gravity="center"
-            android:layout_marginTop="105sp"/>
-
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20sp"
-            android:layout_marginLeft="20sp"
-            android:layout_marginTop="60sp"
-            android:id="@+id/userPhoneWrapper">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
 
-            <EditText
+            <ImageView
+                android:layout_width="167dp"
+                android:layout_height="174dp"
+                android:src="@drawable/logo_devhouse"
+                android:layout_gravity="center"
+                android:layout_marginTop="105sp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/userPhone"
-                android:inputType="number"
-                android:hint="No HP"
-                android:maxLength="12"
-                android:textSize="18sp"/>
+                android:layout_marginRight="20sp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginTop="60sp"
+                android:id="@+id/userPhoneWrapper">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <EditText
+                    android:id="@+id/userPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="No HP"
+                    android:inputType="number"
+                    android:maxLength="12"
+                    android:textColorHighlight="#00000000"
+                    android:textColorLink="#00000000"
+                    android:textSize="18sp" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20sp"
-            android:layout_marginLeft="20sp"
-            android:layout_marginTop="5sp"
-            android:id="@+id/userPasswordWrapper">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/userPassword"
-                android:inputType="textPassword"
-                android:hint="Password"
-                android:textSize="18sp"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginRight="20sp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginTop="5sp"
+                android:id="@+id/userPasswordWrapper">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20sp"
-            android:layout_marginRight="20sp"
-            android:layout_marginLeft="20sp">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/userPassword"
+                    android:inputType="textPassword"
+                    android:hint="Password"
+                    android:textSize="18sp"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.rey.material.widget.CheckBox
-                android:id="@+id/sellerCheckBox"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:text="Login Sebagai Seller"
-                android:gravity="center_vertical"
-                app:cbd_strokeColor="@color/colorPrimaryDark"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginLeft="20sp">
+
+                <com.rey.material.widget.CheckBox
+                    android:id="@+id/sellerCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Login Sebagai Seller"
+                    android:gravity="center_vertical"
+                    app:cbd_strokeColor="@color/black"
+                    android:buttonTint="@color/black"/>
+
+                <TextView
+                    android:id="@+id/lupaPasswordTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Lupa Password?"
+                    android:textStyle="bold"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="15sp"
+                    android:visibility="invisible"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="54sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginLeft="20sp">
+
+                <Button
+                    android:id="@+id/signUpBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="Sign Up"
+                    android:layout_alignParentStart="true"
+                    android:background="@drawable/button_effect_main"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"/>
+
+                <Button
+                    android:id="@+id/signInBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="Sign In"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/button_effect_main"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"/>
+
+            </RelativeLayout>
 
             <TextView
-                android:id="@+id/lupaPasswordTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:text="Lupa Password?"
-                android:textStyle="bold"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="15sp"
-                />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="54sp"
-            android:layout_marginRight="20sp"
-            android:layout_marginLeft="20sp">
-
-            <Button
-                android:id="@+id/signUpBtn"
-                android:layout_width="wrap_content"
+                android:id="@+id/loginTxt"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sign Up"
-                android:layout_alignParentStart="true"/>
+                android:gravity="center"
+                android:text="Login With Another Account"
+                android:layout_marginTop="100sp"
+                android:visibility="invisible"/>
+        </LinearLayout>
 
-            <Button
-                android:id="@+id/signInBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sign In"
-                android:layout_alignParentEnd="true"/>
-
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/loginTxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Login With Another Account"
-            android:layout_marginTop="100sp"/>
-    </LinearLayout>
-
-
-
+    </ScrollView>
 
 </LinearLayout>

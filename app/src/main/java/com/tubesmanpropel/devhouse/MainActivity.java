@@ -26,6 +26,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        finishAffinity();
+    }
+
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -35,9 +42,6 @@ public class MainActivity extends AppCompatActivity {
                     switch (menuItem.getItemId()){
                         case R.id.nav_home:
                             selectedFragment = new UserHomeFragment();
-                            break;
-                        case R.id.nav_feed:
-                            selectedFragment = new UserFeedFragment();
                             break;
                         case R.id.nav_favorite:
                             selectedFragment = new UserFavoriteFragment();
