@@ -35,7 +35,7 @@ import java.util.HashMap;
 
 public class SellerEditProdukActivity extends AppCompatActivity {
 
-    private EditText mNamaProduk, mHargaProduk, mAlamatProduk, mFasilitasProduk, mDeskripsiProduk, mLuasTanahProduk;
+    private EditText mNamaProduk, mHargaProduk, mAlamatProduk, mFasilitasProduk, mDeskripsiProduk, mLuasTanahProduk, mLuasBangunanProduk;
     private Button mEditProdukBtn;
     private ImageView mGambarProduk;
 
@@ -67,6 +67,7 @@ public class SellerEditProdukActivity extends AppCompatActivity {
         mFasilitasProduk = (EditText) findViewById(R.id.fasilitasProdukEdit);
         mDeskripsiProduk = (EditText) findViewById(R.id.deskripsiProdukEdit);
         mLuasTanahProduk = (EditText) findViewById(R.id.luasTanahProdukEdit);
+        mLuasBangunanProduk = (EditText) findViewById(R.id.luasBangunanProdukEdit);
         mEditProdukBtn = (Button) findViewById(R.id.editProdukBtn);
         loadingBar = new ProgressDialog(this);
 
@@ -110,6 +111,7 @@ public class SellerEditProdukActivity extends AppCompatActivity {
 
         HashMap<String, Object> productMap = new HashMap<>();
         productMap.put("luasTanah", mLuasTanahProduk.getText().toString());
+        productMap.put("luasBangunan", mLuasBangunanProduk.getText().toString());
         productMap.put("deskripsi", mDeskripsiProduk.getText().toString());
         productMap.put("fasilitas", mFasilitasProduk.getText().toString());
         productMap.put("alamat", mAlamatProduk.getText().toString());
@@ -160,6 +162,10 @@ public class SellerEditProdukActivity extends AppCompatActivity {
         {
             Toast.makeText(this, "Luas tanah tidak boleh kosong!", Toast.LENGTH_SHORT).show();
         }
+        else if (TextUtils.isEmpty(mLuasBangunanProduk.getText().toString()))
+        {
+            Toast.makeText(this, "Luas bangunan tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+        }
         else if(checker.equals("clicked"))
         {
             uploadImage(idProduk);
@@ -206,6 +212,7 @@ public class SellerEditProdukActivity extends AppCompatActivity {
 
                                 HashMap<String, Object> productMap = new HashMap<>();
                                 productMap.put("luasTanah", mLuasTanahProduk.getText().toString());
+                                productMap.put("luasBangunan", mLuasBangunanProduk.getText().toString());
                                 productMap.put("deskripsi", mDeskripsiProduk.getText().toString());
                                 productMap.put("fasilitas", mFasilitasProduk.getText().toString());
                                 productMap.put("alamat", mAlamatProduk.getText().toString());
@@ -251,6 +258,7 @@ public class SellerEditProdukActivity extends AppCompatActivity {
                     mFasilitasProduk.setText(products.getFasilitas());
                     mDeskripsiProduk.setText(products.getDeskripsi());
                     mLuasTanahProduk.setText(products.getLuasTanah());
+                    mLuasBangunanProduk.setText(products.getLuasBangunan());
 
                     Picasso.get().load(products.getImage()).into(mGambarProduk);
                 }

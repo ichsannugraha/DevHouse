@@ -183,6 +183,27 @@
                 android:layout_marginLeft="29dp"
                 android:layout_marginRight="23dp"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LUAS BANGUNAN"
+                android:textSize="14sp"
+                android:lineHeight="14sp"
+                android:textStyle="normal"
+                android:fontFamily="Roboto"
+                android:textColor="#000000"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="31dp"/>
+
+            <EditText
+                android:id="@+id/luasBangunanProduk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="29dp"
+                android:layout_marginRight="23dp"/>
+
             <Button
                 android:id="@+id/tambahProdukBtn"
                 android:layout_width="110dp"

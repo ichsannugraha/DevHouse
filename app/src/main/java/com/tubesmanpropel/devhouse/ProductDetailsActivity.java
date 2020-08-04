@@ -34,7 +34,7 @@ import java.util.HashMap;
 public class ProductDetailsActivity extends AppCompatActivity {
 
     private TextView mNamaSeller, mNamaProduk, mHargaProduk, mDeskripsiProduk;
-    private TextView mAlamatProduk, mFasilitasProduk, mLuasTanahProduk, mTanggalUploadProduk;
+    private TextView mAlamatProduk, mFasilitasProduk, mLuasTanahProduk, mLuasBangunanProduk, mTanggalUploadProduk;
     private ImageView mGambarProduk;
     private Button mPhoneBtn, mFavoriteBtn;
     private ProgressDialog loadingBar;
@@ -65,6 +65,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         mAlamatProduk = (TextView) findViewById(R.id.alamatProdukDetail);;
         mFasilitasProduk = (TextView) findViewById(R.id.fasilitasProdukDetail);;
         mLuasTanahProduk = (TextView) findViewById(R.id.luasTanahProdukDetail);;
+        mLuasBangunanProduk = (TextView) findViewById(R.id.luasBangunanProdukDetail);
         mGambarProduk = (ImageView) findViewById(R.id.gambarProdukDetail);
 
         mPhoneBtn = (Button) findViewById(R.id.phoneProdukDetail);
@@ -204,6 +205,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     mAlamatProduk.setText(products.getAlamat());
                     mFasilitasProduk.setText(products.getFasilitas());
                     mLuasTanahProduk.setText(products.getLuasTanah() + " m2");
+                    mLuasBangunanProduk.setText(products.getLuasBangunan() + " m2");
 
                     messageProduk = products.getNama();
                     message = "Hai, saya tertarik dengan informasi '" + messageProduk + "' di aplikasi DevHouse. Mohon informasinya, terimakasih!";

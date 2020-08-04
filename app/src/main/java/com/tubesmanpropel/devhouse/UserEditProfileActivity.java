@@ -116,10 +116,10 @@ public class UserEditProfileActivity extends AppCompatActivity {
             mProfileImage.setImageURI(imageUri);
         }
         else {
-            Toast.makeText(UserEditProfileActivity.this, "Error, Try Again.", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(UserEditProfileActivity.this, "Error, silakan coba kembali!", Toast.LENGTH_SHORT).show();
 
-            startActivity(new Intent(UserEditProfileActivity.this, UserEditProfileActivity.class));
-            finish();
+            //startActivity(new Intent(UserEditProfileActivity.this, UserEditProfileActivity.class));
+            //finish();
         }
     }
 

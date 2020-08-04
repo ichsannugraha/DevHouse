@@ -122,10 +122,10 @@ public class SellerEditProfileActivity extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Error, silakan coba kembali!", Toast.LENGTH_SHORT).show();
 
-            startActivity(new Intent(SellerEditProfileActivity.this, SellerEditProfileActivity.class));
-            finish();
+            //startActivity(new Intent(SellerEditProfileActivity.this, SellerEditProfileActivity.class));
+            //finish();
         }
     }
 
@@ -234,14 +234,14 @@ public class SellerEditProfileActivity extends AppCompatActivity {
 
                                 progressDialog.dismiss();
 
-                                startActivity(new Intent(SellerEditProfileActivity.this, SellerMainActivity.class));
+                                startActivity(new Intent(SellerEditProfileActivity.this, SellerSettingsActivity.class));
                                 Toast.makeText(SellerEditProfileActivity.this, "Update info profile berhasil!", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                             else
                             {
                                 progressDialog.dismiss();
-                                Toast.makeText(SellerEditProfileActivity.this, "Error.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SellerEditProfileActivity.this, "Error!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

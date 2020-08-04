@@ -33,9 +33,9 @@ import java.util.HashMap;
 
 public class SellerTambahProdukActivity extends AppCompatActivity {
 
-    private String namaProd, hargaProd, alamatProd, fasilitasProd, deskripsiProd, luasTanahProd;
+    private String namaProd, hargaProd, alamatProd, fasilitasProd, deskripsiProd, luasTanahProd, luasBangunanProd;
     private String saveCurrentDate, saveCurrentTime;
-    private EditText mNamaProd, mHargaProd, mAlamatProd, mFasilitasProd, mDeskripsiProd, mLuasTanahProd;
+    private EditText mNamaProd, mHargaProd, mAlamatProd, mFasilitasProd, mDeskripsiProd, mLuasTanahProd, mLuasBangunanProd;
     private Button mTambahProd;
     private ImageView mImageProd1;
     private static final int GalleryPick =1;
@@ -63,6 +63,7 @@ public class SellerTambahProdukActivity extends AppCompatActivity {
         mFasilitasProd = (EditText) findViewById(R.id.fasilitasProduk);
         mDeskripsiProd = (EditText) findViewById(R.id.deskripsiProduk);
         mLuasTanahProd = (EditText) findViewById(R.id.luasTanahProduk);
+        mLuasBangunanProd = (EditText) findViewById(R.id.luasBangunanProduk);
         mTambahProd = (Button) findViewById(R.id.tambahProdukBtn);
         loadingBar = new ProgressDialog(this);
 
@@ -112,6 +113,7 @@ public class SellerTambahProdukActivity extends AppCompatActivity {
         fasilitasProd = mFasilitasProd.getText().toString();
         deskripsiProd = mDeskripsiProd.getText().toString();
         luasTanahProd = mLuasTanahProd.getText().toString();
+        luasBangunanProd = mLuasBangunanProd.getText().toString();
 
         if (imageUri == null) {
             Toast.makeText(this, "Gambar produk tidak boleh kosong!", Toast.LENGTH_SHORT).show();
@@ -133,6 +135,9 @@ public class SellerTambahProdukActivity extends AppCompatActivity {
         }
         else if (TextUtils.isEmpty(luasTanahProd)) {
             Toast.makeText(this, "Luas tanah produk tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(luasBangunanProd)) {
+            Toast.makeText(this, "Luas bangunan produk tidak boleh kosong!", Toast.LENGTH_SHORT).show();
         }
         else {
             StoreProductInformation();
@@ -211,6 +216,7 @@ public class SellerTambahProdukActivity extends AppCompatActivity {
         productMap.put("date", saveCurrentDate);
         productMap.put("time", saveCurrentTime);
         productMap.put("luasTanah", luasTanahProd);
+        productMap.put("luasBangunan", luasBangunanProd);
         productMap.put("deskripsi", deskripsiProd);
         productMap.put("image", downloadImageUrl);
         productMap.put("fasilitas", fasilitasProd);
